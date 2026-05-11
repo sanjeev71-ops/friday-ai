@@ -1,0 +1,18 @@
+services:
+
+  api:
+    build: .
+    command: uvicorn apps.api.main:app --host 0.0.0.0 --port 8000
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build: .
+    command: streamlit run apps/frontend/Home.py --server.port 8501 --server.address 0.0.0.0
+    ports:
+      - "8501:8501"
+
+  ollama:
+    image: ollama/ollama
+    ports:
+      - "11434:11434"
